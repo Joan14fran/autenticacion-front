@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './page/dashboard/dashboard.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const routes: Routes = [
-  {
-    path:'', component:DashboardComponent
-  },
+  { path: "notfound", component: NotfoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule { }
+export class SharedRoutingModule { }
