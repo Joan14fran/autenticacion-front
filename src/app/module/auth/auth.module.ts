@@ -5,6 +5,11 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './page/login/login.component';
 import { SignupComponent } from './page/signup/signup.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
+import { PrimengModule } from './../../shared/Primeng.module';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +18,18 @@ import { SignupComponent } from './page/signup/signup.component';
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PrimengModule
+  ],
+  exports:[
+    LoginComponent,
+    SignupComponent
+  ],
+  providers:[
+    CookieService,
+    MessageService
   ]
 })
 export class AuthModule { }
