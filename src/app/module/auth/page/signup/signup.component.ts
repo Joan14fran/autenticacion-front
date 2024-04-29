@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 import { AuthServiceService } from '../../service/auth.service.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor( private fb: FormBuilder, private messageService: MessageService, private authService: AuthServiceService) { }
+  constructor( private fb: FormBuilder, private messageService: MessageService, private authService: AuthServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -21,10 +22,11 @@ export class SignupComponent implements OnInit {
 
   initForm(): void {
     this.form = this.fb.group({
-      username: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, this.matchValues('password')]]
+      password2: ['', [Validators.required, this.matchValues('password')]]
     });
   }
 
@@ -37,23 +39,36 @@ export class SignupComponent implements OnInit {
 
   submitForm(): void {
     if (this.form.valid) {
-      // 2. Llama al método signUp del servicio AuthServiceService
-      this.authService.signUp(this.form.value)
-        .subscribe(
-          response => {
-            console.log(response);
-            this.messageService.add({ severity: 'success', summary: 'Registro exitoso', detail: 'El usuario ha sido registrado correctamente.' });
-            this.form.reset();
-          },
-          error => {
-            console.error(error);
-            // Manejar el error, mostrar mensaje de error, etc.
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error al registrar el usuario.' });
-          }
-        );
+      this.authService.registerUser(this.form.value).subscribe(
+        response => {
+          // Mostrar un toast indicando que el registro fue exitoso
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Registro exitoso',
+            detail: 'Se ha enviado un código a tu correo electrónico para activar tu cuenta.'
+          });
+
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Registro exitoso | NO Salgas de la Aplicacion',
+            detail: 'Esto podria tardar unos segundos.',
+            life: 20000
+          });
+
+
+          // Redirigir al usuario a la página de verificación de correo electrónico después de 3 segundos
+          setTimeout(() => {
+            this.router.navigate(['/auth/verify-email']);
+          }, 7000);
+        },
+        error => {
+          // Manejar el error, por ejemplo mostrar un mensaje de error
+          console.error(error);
+        }
+      );
     } else {
-      // Aquí puedes manejar lo que sucede cuando el formulario no es válido
-      this.messageService.add({ severity: 'warn', summary: 'Formulario inválido', detail: 'Por favor completa correctamente todos los campos.' });
+      // Mostrar un mensaje de error si el formulario no es válido
+      this.messageService.add({severity:'error', summary:'Error', detail:'Por favor, completa correctamente todos los campos.'});
     }
   }
 }

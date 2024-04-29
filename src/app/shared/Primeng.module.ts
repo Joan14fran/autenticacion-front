@@ -39,6 +39,7 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ChipModule} from 'primeng/chip';
 import { SlideMenuModule } from 'primeng/slidemenu';
+import { InputOtpModule } from 'primeng/inputotp';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 // import { ChartModule } from 'primeng/chart';
 
@@ -57,6 +58,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
       PanelModule,
       // ChartModule,
       ConfirmDialogModule,
+      InputOtpModule,
       StepsModule,
       MultiSelectModule,
       AutoCompleteModule,

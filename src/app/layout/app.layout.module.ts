@@ -17,6 +17,10 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
+import { PrimengModule } from '../shared/Primeng.module';
+import { AppProfileSidebarComponent } from './app.profilesidebar.component';
+import { MessageService } from 'primeng/api'
+import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
     declarations: [
@@ -26,6 +30,7 @@ import { AppLayoutComponent } from "./app.layout.component";
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        AppProfileSidebarComponent
     ],
     imports: [
         BrowserModule,
@@ -39,8 +44,13 @@ import { AppLayoutComponent } from "./app.layout.component";
         InputSwitchModule,
         RippleModule,
         RouterModule,
-        AppConfigModule
+        AppConfigModule,
+        AvatarModule,
+        PrimengModule
     ],
-    exports: [AppLayoutComponent]
+    exports: [AppLayoutComponent],
+    providers: [
+        MessageService // Agrega MessageService a la lista de proveedores
+    ]
 })
 export class AppLayoutModule { }

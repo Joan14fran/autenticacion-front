@@ -23,30 +23,32 @@ export class LoginComponent implements OnInit {
 
   initForm(): void {
     this.form = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
   submitForm(): void {
     if (this.form.valid) {
-      const { username, password } = this.form.value;
-      this.authService.signIn(username, password).subscribe(
+      const user = this.form.value;
+      this.authService.loginUser(user).subscribe(
         response => {
-          // Aquí maneja la respuesta del inicio de sesión
-          this.messageService.add({ severity: 'info', summary: 'Login', detail: 'Estoy podria tardar unos segundos.' });
-          // Redirige al usuario a la página de dashboard
+          // Manejar la respuesta exitosa
+          console.log(response);
+          // Mostrar un mensaje de éxito al usuario si es necesario
+          this.messageService.add({severity:'success', summary:'Autenticacion Exitosa', detail:'credenciales validadas con exito.'});
+          this.messageService.add({severity:'info', summary:'Autenticacion Exitosa | NO Salgas de la Aplicacion', detail:'esto podria tardar unos segundos.'});
           setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 1500);
+            this.router.navigate(['/']);
+          }, 4000);
         },
         error => {
-          // Aquí maneja los errores de inicio de sesión
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Credenciales inválidas.' });
+          // Manejar el error
+          console.error(error);
+          // Mostrar un mensaje de error al usuario si es necesario
+          this.messageService.add({severity:'error', summary:'Autenticacion Fallida', detail:'Error al iniciar sesión. Por favor, revise sus credenciales.'});
         }
       );
-    } else {
-      // Aquí puedes manejar lo que sucede cuando el formulario no es válido
     }
   }
 }

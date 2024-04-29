@@ -9,7 +9,7 @@
     </svg>
 
     <!-- Formulario -->
-    <p-toast position="top-right"></p-toast>
+    <p-toast position="top-right" [life]="10000"></p-toast>
     <div class="flex flex-column align-items-center justify-content-center" style="position: relative; z-index: 1;">
         <img src="assets/layout/images/logo-dark.svg" alt="Sakai logo" class="mb-5 w-6rem flex-shrink-0">
         <div style="border-radius:20px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
@@ -22,13 +22,13 @@
                     <div class="flex flex-column">
                         <form [formGroup]="form" (ngSubmit)="submitForm()">
                             <span class="p-float-label mb-5">
-                                <input id="username" type="text" pInputText style="padding:1rem" class="w-full" formControlName="username">
-                                <label for="username">Nombre de usuario</label>
+                                <input id="email" type="text" pInputText style="padding:1rem" class="w-full" formControlName="email">
+                                <label for="email">Correo Electronico</label>
                             </span>
     
                             <span class="p-float-label mb-5">
-                                <p-password id="password1" [toggleMask]="true" inputStyleClass="w-full p-3 md:w-30rem" formControlName="password" [feedback]="false"></p-password>
-                                <label for="password1">Contraseña</label>
+                                <p-password id="password" [toggleMask]="true" inputStyleClass="w-full p-3 md:w-30rem" formControlName="password" [feedback]="false"></p-password>
+                                <label for="password">Contraseña</label>
                             </span>
     
                             <div class="flex align-items-center justify-content-between mb-5 gap-5">

@@ -9,12 +9,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { PrimengModule } from './../../shared/Primeng.module';
+import { VerifyEmailComponent } from './page/verify-email/verify-email.component';
+import { PasswordResetRequestComponent } from './page/password-reset-request/password-reset-request.component';
+import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    VerifyEmailComponent,
+    PasswordResetRequestComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
