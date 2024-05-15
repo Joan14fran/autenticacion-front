@@ -40,6 +40,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {ChipModule} from 'primeng/chip';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { InputOtpModule } from 'primeng/inputotp';
+import { KnobModule } from 'primeng/knob';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 // import { ChartModule } from 'primeng/chart';
 
@@ -56,6 +57,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
       SlideMenuModule,
       BadgeModule,
       PanelModule,
+      KnobModule,
       // ChartModule,
       ConfirmDialogModule,
       InputOtpModule,

@@ -7,6 +7,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { PrimengModule } from './shared/Primeng.module';
 import { FormsModule } from '@angular/forms';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { TokenInterceptor } from './core/interceptors/token.interceptor'
 
 
 const ngxUiLoaderConfig:any = {
@@ -53,7 +54,9 @@ const ngxUiLoaderConfig:any = {
     HttpClientModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

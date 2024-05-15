@@ -3,15 +3,15 @@
 
     <div class="flex flex-column mx-auto md:mx-0 ng-tns-c2903228607-0">
         <span class="mb-2 font-semibold">Bienvenido</span>
-        <span class="text-color-secondary font-medium mb-5">Johan Santiago</span>
+        <span class="text-color-secondary font-medium mb-5">{{ user.full_name }}</span>
         <ul class="list-none m-0 p-0">
             <li>
                 <a class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150"
                     [routerLink]="['/usuario/perfil']">
-                    <span> <i class="pi pi-user text-xl text-primary"></i></span>
+                    <span><i class="pi pi-user text-xl text-primary"></i></span>
                     <div class="ml-3">
                         <span class="mb-2 font-semibold" style="color: rgb(247, 247, 247);">Perfil</span>
-                        <p class="text-color-secondary m-0">JJohan Peña</p>
+                        <p class="text-color-secondary m-0">{{ user.full_name }}</p>
                     </div>
                 </a>
             </li>
@@ -21,7 +21,7 @@
                     <span><i class="pi pi-id-card text-xl text-primary"></i></span>
                     <div class="ml-3">
                         <span class="mb-2 font-semibold" style="color: rgb(247, 247, 247);">Direccion Electronica</span>
-                        <p class="text-color-secondary m-0">emailgmail.com</p>
+                        <p class="text-color-secondary m-0">{{ user.email }}</p>
                     </div>
                 </a>
             </li>
@@ -36,15 +36,15 @@
                 </a>
             </li>
             <li>
-                <a 
-                    class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
+                <a (click)="logout()" class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
                     <span><i class="pi pi-power-off text-xl text-primary"></i></span>
                     <div class="ml-3">
                         <span class="mb-2 font-semibold" style="color: rgb(247, 247, 247);">Desconectarse</span>
-                        <p class="text-color-secondary m-0">Finalizar Sesion</p>
+                        <p class="text-color-secondary m-0">Finalizar Sesión</p>
                     </div>
                 </a>
             </li>
+            
         </ul>
     </div>
 
@@ -54,25 +54,30 @@
 
         <ul class="list-none m-0 p-0">
             <li>
-                <a class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
+                <a
+                    class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
                     <span><i class="pi pi-comment text-xl text-primary"></i></span>
                     <div class="ml-3">
-                        <span class="mb-2 font-semibold" style="color: rgb(247, 247, 247);">Your post has new comments</span>
+                        <span class="mb-2 font-semibold" style="color: rgb(247, 247, 247);">Your post has new
+                            comments</span>
                         <p class="text-color-secondary m-0">5 min ago</p>
                     </div>
                 </a>
             </li>
             <li>
-                <a class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
+                <a
+                    class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
                     <span><i class="pi pi-trash text-xl text-primary"></i></span>
                     <div class="ml-3">
-                        <span class="mb-2 font-semibold" style="color: rgb(247, 247, 247);">Your post has been deleted</span>
+                        <span class="mb-2 font-semibold" style="color: rgb(247, 247, 247);">Your post has been
+                            deleted</span>
                         <p class="text-color-secondary m-0">15min ago</p>
                     </div>
                 </a>
             </li>
             <li>
-                <a class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150"><span><i
+                <a
+                    class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150"><span><i
                             class="pi pi-folder text-xl text-primary"></i></span>
                     <div class="ml-3">
                         <span class="mb-2 font-semibold" style="color: rgb(247, 247, 247);">Post has been updated</span>

@@ -47,19 +47,21 @@ export class SignupComponent implements OnInit {
             summary: 'Registro exitoso',
             detail: 'Se ha enviado un código a tu correo electrónico para activar tu cuenta.'
           });
-
+  
           this.messageService.add({
             severity: 'info',
             summary: 'Registro exitoso | NO Salgas de la Aplicacion',
             detail: 'Esto podria tardar unos segundos.',
             life: 20000
           });
-
-
+  
+          // Reiniciar el formulario
+          this.form.reset();
+  
           // Redirigir al usuario a la página de verificación de correo electrónico después de 3 segundos
           setTimeout(() => {
-            this.router.navigate(['/auth/verify-email']);
-          }, 7000);
+            this.router.navigate(['/accounts/verify-email']);
+          }, 4000);
         },
         error => {
           // Manejar el error, por ejemplo mostrar un mensaje de error
@@ -71,4 +73,5 @@ export class SignupComponent implements OnInit {
       this.messageService.add({severity:'error', summary:'Error', detail:'Por favor, completa correctamente todos los campos.'});
     }
   }
+  
 }

@@ -1,6 +1,7 @@
 <div class="layout-topbar">
     <a class="layout-topbar-logo" routerLink="">
-        <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo">
+        <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
+            alt="logo">
         <span>SAKAI</span>
     </a>
 
@@ -9,13 +10,22 @@
     </button>
 
     <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
-        <i class="pi pi pi-user"></i>
+        <p-avatar image="../../assets/demo/images/avatar/bernardodominic.png" styleClass="mr-2" size="large" shape="circle"></p-avatar>
     </button>
-    
+
+
+
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pinputtext="" placeholder="Search" class="p-inputtext p-component p-element w-12rem sm:w-full">
+        </span> &nbsp;
+        <button pbutton="" type="button" icon="pi pi-sign-out" class="p-element p-button-text p-button-secondary p-button-rounded flex-shrink-0 p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-sign-out" aria-hidden="true"></span>
+        </button>
         <button class="p-link layout-topbar-button" (click)="layoutService.showProfileSidebar()">
-            <i class="pi pi-user"></i>
+            <p-avatar image="../../assets/demo/images/avatar/bernardodominic.png" styleClass="mr-2" size="large" shape="circle"></p-avatar>
         </button>
     </div>
 </div>

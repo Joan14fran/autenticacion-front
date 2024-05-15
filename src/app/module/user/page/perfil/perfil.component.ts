@@ -7,12 +7,12 @@ import { UserServiceService } from '../../service/user.service.service';
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.scss'
 })
-export class PerfilComponent { 
+export class PerfilComponent {
 
-  user:any
-  constructor(private cookie: CookieService, private service: UserServiceService){
-    // this.user = JSON.parse(this.cookie.get('userAuth'))
+  user: any
+  constructor(private cookie: CookieService, private service: UserServiceService) {
+    this.user = JSON.parse(this.cookie.get('user'));
   }
-  
+
 
 }

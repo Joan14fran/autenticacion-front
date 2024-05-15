@@ -11,10 +11,10 @@ import { MessageService } from 'primeng/api';
 })
 export class AppProfileSidebarComponent {
     user: any;
-    constructor(public layoutService: LayoutService, private cookie: CookieService, private authService: AuthServiceService, private messageService: MessageService) {
-        // this.user = JSON.parse(this.cookie.get("userAuth"));
-    }
 
+    constructor( public layoutService: LayoutService, private cookie: CookieService, private authService: AuthServiceService, private messageService: MessageService, private router: Router) {
+        this.user = JSON.parse(this.cookie.get('user'));
+    }
 
     get visible(): boolean {
         return this.layoutService.state.profileSidebarVisible;
@@ -23,4 +23,17 @@ export class AppProfileSidebarComponent {
     set visible(_val: boolean) {
         this.layoutService.state.profileSidebarVisible = _val;
     }
+
+    logout() {
+        this.authService.logoutUser().subscribe(
+          () => {
+            this.messageService.add({severity:'info', summary:'Login', detail:'Se cerró la sesión correctamente'});
+          },
+          error => {
+            console.error(error);
+            this.messageService.add({severity:'error', summary:'Error', detail:'Hubo un problema al cerrar sesión. Por favor, inténtalo de nuevo.'});
+          }
+        );
+      }
+      
 }

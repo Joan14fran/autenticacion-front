@@ -19,12 +19,12 @@ export class AuthGuard implements CanActivate {
 
   check():boolean{
     try {
-      console.log(this.cookieService.get("AuthToken"));
-      if(!this.cookieService.check("AuthToken")){
+      // console.log(this.cookieService.get("access_token"));
+      if(!this.cookieService.check("access_token")){
         this.router.navigate(['auth'])
         return false
       }else{
-        let token = this.cookieService.get("AuthToken")
+        let token = this.cookieService.get("access_token")
         if(token =="undefined"){
           this.router.navigate(['auth'])
           return false

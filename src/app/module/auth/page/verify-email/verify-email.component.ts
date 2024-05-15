@@ -51,8 +51,8 @@ export class VerifyEmailComponent implements OnInit {
           // Retrasar la redirección después de que aparezca el toast
           setTimeout(() => {
             // Redirigir al usuario a otra página después de verificar el correo electrónico, por ejemplo:
-            this.router.navigate(['/auth/login']);
-          }, 5000); // Redirigir después de 2 segundos (ajusta el tiempo según sea necesario)
+            this.router.navigate(['/auth']);
+          }, 4000); // Redirigir después de 2 segundos (ajusta el tiempo según sea necesario)
         },
         error => {
           // Manejar el error, por ejemplo mostrar un mensaje de error

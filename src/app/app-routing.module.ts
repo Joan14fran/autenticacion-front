@@ -3,18 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { LoginComponent } from './module/auth/page/login/login.component';
 import { SignupComponent } from './module/auth/page/signup/signup.component';
-import { AuthGuard } from './core/guard/auth.guard'; // Importa el guard de autenticación
+import { AuthGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
 
   // URLs de Autenticacion
-  { path: 'auth', loadChildren: () => import('./module/auth/auth.module').then(i => i.AuthModule) },
+  { path: "auth", component: LoginComponent, loadChildren: () => import('./module/auth/auth.module').then(i => i.AuthModule) },
+  { path: 'accounts', loadChildren: () => import('./module/auth/auth.module').then(i => i.AuthModule) },
 
   // URLs del sistema protegidas por el guard de autenticación
   {
     path: '',
     component: AppLayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', loadChildren: () => import('./module/home/home.module').then(r => r.HomeModule) },
       { path: 'usuario', loadChildren: () => import('./module/user/user.module').then(i => i.UserModule) }
