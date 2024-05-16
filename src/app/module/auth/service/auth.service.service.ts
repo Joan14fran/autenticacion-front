@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { tap, retry, catchError, throwError } from 'rxjs';
 import { User } from '../../../core/models/models';
+import { Observable } from 'rxjs';
 import { envairoment } from '../../../../environments/envairoment';
 
 @Injectable({
@@ -18,6 +19,20 @@ export class AuthServiceService {
   constructor(private http: HttpClient, private cookie: CookieService, private router: Router) {
   }
 
+
+  requestPasswordReset(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}accounts/password-reset/`, { email });
+  }
+
+  setNewPassword(uidb64: string, token: string, password: string, confirm_password: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}accounts/set-new-password/`, {
+      uidb64,
+      token,
+      password,
+      confirm_password
+    });
+  }
+  
 
   registerUser(user: any) {
     return this.http.post<any>(`${this.apiUrl}accounts/register/`, user)
@@ -49,6 +64,13 @@ export class AuthServiceService {
         retry(2)
       );
   }
+
+  refreshAccessToken(refreshToken: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}accounts/token/refresh/`, { refresh: refreshToken });
+  }
+  
+
+  
 
   logoutUser() {
     const refreshToken = this.cookie.get('refresh_token'); // Obtener el token de actualización de las cookies

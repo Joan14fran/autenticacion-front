@@ -36,7 +36,7 @@
                                     <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
                                     <label for="rememberme1">Recuérdame</label>
                                 </div>
-                                <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">¿Olvidaste tu contraseña?</a>
+                                <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)" (click)="showDialog()">¿Olvidaste tu contraseña?</a>
                             </div>
     
                             <button pButton label="Iniciar sesión" class="w-full p-2 mb-2" [disabled]="form.invalid" icon="pi pi-check"></button>
@@ -47,5 +47,17 @@
                 </div>
             </div>
         </div>
+
+        <p-dialog header="Recuperar Contraseña" [(visible)]="visible" [style]="{ width: '25rem' }" [breakpoints]="{ '1169px': '45vw', '545px': '50vw' }">
+            <span class="p-text-secondary block mb-5">Ingrese su correo electrónico para restablecer su contraseña.</span>
+            <div class="flex flex-column gap-2 mb-3">
+                <label for="email">Correo Electrónico</label>
+                <input pInputText id="email" [(ngModel)]="email" aria-describedby="email-help" />
+            </div>
+            <div class="flex justify-content-end gap-2">
+                <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+                <p-button label="Enviar" (click)="requestPasswordReset()" />
+            </div>
+        </p-dialog>        
     </div>    
 </div>

@@ -42,6 +42,7 @@ import { SlideMenuModule } from 'primeng/slidemenu';
 import { InputOtpModule } from 'primeng/inputotp';
 import { KnobModule } from 'primeng/knob';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
+
 // import { ChartModule } from 'primeng/chart';
 
 @NgModule({

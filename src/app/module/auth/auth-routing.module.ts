@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './page/login/login.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { VerifyEmailComponent } from './page/verify-email/verify-email.component';
-import { PasswordResetRequestComponent } from './page/password-reset-request/password-reset-request.component';
 import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
+import { Login2Component } from './page/login2/login2.component';
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "verify-email", component: VerifyEmailComponent },
-  { path: "forget-password", component: PasswordResetRequestComponent },
-  { path: "password-confirm", component: ResetPasswordComponent }
+  { path: 'password-reset-confirm/:uidb64/:token', component: ResetPasswordComponent },
+  { path: 'login2', component: Login2Component }
 ];
 
 @NgModule({

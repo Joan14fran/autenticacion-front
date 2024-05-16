@@ -10,24 +10,24 @@ import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { PrimengModule } from './../../shared/Primeng.module';
 import { VerifyEmailComponent } from './page/verify-email/verify-email.component';
-import { PasswordResetRequestComponent } from './page/password-reset-request/password-reset-request.component';
 import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
+import { Login2Component } from './page/login2/login2.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent,
+    LoginComponent, 
     SignupComponent,
     VerifyEmailComponent,
-    PasswordResetRequestComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    Login2Component
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    PrimengModule
+    PrimengModule,
   ],
   exports:[
     LoginComponent,

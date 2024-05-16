@@ -31,7 +31,7 @@ export class AppProfileSidebarComponent {
           },
           error => {
             console.error(error);
-            this.messageService.add({severity:'error', summary:'Error', detail:'Hubo un problema al cerrar sesión. Por favor, inténtalo de nuevo.'});
+            this.messageService.add({severity:'error', summary:'Error', detail:'Hubo un problema al cerrar sesión.'});
           }
         );
       }

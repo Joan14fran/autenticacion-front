@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { LoginComponent } from './module/auth/page/login/login.component';
-import { SignupComponent } from './module/auth/page/signup/signup.component';
 import { AuthGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
