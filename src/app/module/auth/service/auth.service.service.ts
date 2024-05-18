@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { tap, retry, catchError, throwError } from 'rxjs';
 import { User } from '../../../core/models/models';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { envairoment } from '../../../../environments/envairoment';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthServiceService {
   refreshToken: string = "";
   private apiUrl = envairoment.url;
 
-  constructor(private http: HttpClient, private cookie: CookieService, private router: Router) {
+  constructor(private http: HttpClient, private cookie: CookieService, private router: Router, private messageService: MessageService) {
   }
 
 
@@ -65,13 +66,31 @@ export class AuthServiceService {
       );
   }
 
+  clearCookiesAndNotify(message: string): void {
+    this.cookie.delete('user');
+    this.cookie.delete('access_token');
+    this.cookie.delete('refresh_token');
+    this.messageService.add({ severity: 'warn', summary: 'Sesión Finalizada', detail: message });
+    this.router.navigate(['auth']);
+  }
+
   refreshAccessToken(refreshToken: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}accounts/token/refresh/`, { refresh: refreshToken });
+    if (!refreshToken) {
+      this.clearCookiesAndNotify('Su sesión ha expirado.');
+      return of(null);
+    }
+    return this.http.post<any>(`${this.apiUrl}accounts/token/refresh/`, { refresh: refreshToken }).pipe(
+      tap(response => {
+        const newAccessToken = response.access;
+        this.cookie.set('access_token', newAccessToken);
+      }),
+      catchError(error => {
+        this.clearCookiesAndNotify('Su sesión ha expirado.');
+        return of(null);
+      })
+    );
   }
   
-
-  
-
   logoutUser() {
     const refreshToken = this.cookie.get('refresh_token'); // Obtener el token de actualización de las cookies
     return this.http.post<any>(`${this.apiUrl}accounts/logout/`, { refresh_token: refreshToken })
@@ -85,5 +104,7 @@ export class AuthServiceService {
         }),retry(2)
       );
   }
+
+  
   
 }

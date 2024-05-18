@@ -7,10 +7,10 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { PrimengModule } from './shared/Primeng.module';
 import { FormsModule } from '@angular/forms';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
-import { TokenInterceptor } from './core/interceptors/token.interceptor'
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { MessageService } from 'primeng/api';
 
-
-const ngxUiLoaderConfig:any = {
+const ngxUiLoaderConfig: any = {
   "bgsColor": "#06b6d4",
   "bgsOpacity": 0.5,
   "bgsPosition": "bottom-right",
@@ -39,7 +39,7 @@ const ngxUiLoaderConfig:any = {
   "textPosition": "center-center",
   "maxTime": -1,
   "minTime": 300
-}
+};
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ const ngxUiLoaderConfig:any = {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

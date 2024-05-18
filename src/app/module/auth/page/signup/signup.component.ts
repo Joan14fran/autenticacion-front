@@ -66,6 +66,11 @@ export class SignupComponent implements OnInit {
         error => {
           // Manejar el error, por ejemplo mostrar un mensaje de error
           console.error(error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Ocurrió un error al registrar. Por favor, intenta nuevamente más tarde.'
+          });
         }
       );
     } else {
@@ -73,5 +78,6 @@ export class SignupComponent implements OnInit {
       this.messageService.add({severity:'error', summary:'Error', detail:'Por favor, completa correctamente todos los campos.'});
     }
   }
+  
   
 }
