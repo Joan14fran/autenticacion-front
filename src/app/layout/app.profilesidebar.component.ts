@@ -27,7 +27,7 @@ export class AppProfileSidebarComponent {
     logout() {
         this.authService.logoutUser().subscribe(
           () => {
-            this.messageService.add({severity:'info', summary:'Login', detail:'Se cerró la sesión correctamente'});
+            this.messageService.add({severity:'info', summary:'System Auth', detail:'Se cerró la sesión correctamente'});
           },
           error => {
             console.error(error);

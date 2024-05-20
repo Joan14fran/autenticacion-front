@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../service/auth.service.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; // Importar NgxUiLoaderService
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,13 @@ export class SignupComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor( private fb: FormBuilder, private messageService: MessageService, private authService: AuthServiceService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private authService: AuthServiceService,
+    private router: Router,
+    private ngxLoader: NgxUiLoaderService // Inyectar NgxUiLoaderService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -39,8 +46,12 @@ export class SignupComponent implements OnInit {
 
   submitForm(): void {
     if (this.form.valid) {
+      this.ngxLoader.start(); // Iniciar el cargador
+
       this.authService.registerUser(this.form.value).subscribe(
         response => {
+          this.ngxLoader.stop(); // Detener el cargador después de la respuesta exitosa
+
           // Mostrar un toast indicando que el registro fue exitoso
           this.messageService.add({
             severity: 'success',
@@ -50,20 +61,22 @@ export class SignupComponent implements OnInit {
   
           this.messageService.add({
             severity: 'info',
-            summary: 'Registro exitoso | NO Salgas de la Aplicacion',
-            detail: 'Esto podria tardar unos segundos.',
+            summary: 'Registro exitoso | NO Salgas de la Aplicación',
+            detail: 'Esto podría tardar unos segundos.',
             life: 20000
           });
   
           // Reiniciar el formulario
           this.form.reset();
   
-          // Redirigir al usuario a la página de verificación de correo electrónico después de 3 segundos
+          // Redirigir al usuario a la página de verificación de correo electrónico después de 4 segundos
           setTimeout(() => {
             this.router.navigate(['/accounts/verify-email']);
           }, 4000);
         },
         error => {
+          this.ngxLoader.stop(); // Detener el cargador en caso de error
+
           // Manejar el error, por ejemplo mostrar un mensaje de error
           console.error(error);
           this.messageService.add({
@@ -75,9 +88,11 @@ export class SignupComponent implements OnInit {
       );
     } else {
       // Mostrar un mensaje de error si el formulario no es válido
-      this.messageService.add({severity:'error', summary:'Error', detail:'Por favor, completa correctamente todos los campos.'});
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Por favor, completa correctamente todos los campos.'
+      });
     }
   }
-  
-  
 }

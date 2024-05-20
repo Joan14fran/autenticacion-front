@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AuthServiceService } from '../../service/auth.service.service';
 
 @Component({
@@ -15,9 +16,14 @@ export class ResetPasswordComponent implements OnInit {
   uidb64: string | null = null;
   token: string | null = null;
 
-  constructor( private fb: FormBuilder, private authService: AuthServiceService, private messageService: MessageService, private router: Router, private route: ActivatedRoute) {
-
-  }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthServiceService,
+    private messageService: MessageService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private ngxLoader: NgxUiLoaderService // Inyectar NgxUiLoaderService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -39,14 +45,17 @@ export class ResetPasswordComponent implements OnInit {
     if (this.form.valid && this.uidb64 && this.token) {
       const { password, confirm_password } = this.form.value;
       if (password === confirm_password) {
+        this.ngxLoader.start(); // Iniciar el cargador
         this.authService.setNewPassword(this.uidb64, this.token, password, confirm_password).subscribe(
           response => {
+            this.ngxLoader.stop(); // Detener el cargador después de la respuesta exitosa
             this.messageService.add({ severity: 'success', summary: 'Contraseña Restablecida', detail: 'Su contraseña ha sido restablecida con éxito.' });
             setTimeout(() => {
               this.router.navigate(['/']);
             }, 4000);
           },
           error => {
+            this.ngxLoader.stop(); // Detener el cargador en caso de error
             console.error(error);
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Hubo un problema al restablecer la contraseña. Por favor, inténtelo de nuevo.' });
           }
@@ -56,5 +65,5 @@ export class ResetPasswordComponent implements OnInit {
       }
     }
   }
-  
+
 }

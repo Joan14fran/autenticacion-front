@@ -9,9 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 const ngxUiLoaderConfig: any = {
-  "bgsColor": "#06b6d4",
+  "bgsColor": "#45648F",
   "bgsOpacity": 0.5,
   "bgsPosition": "bottom-right",
   "bgsSize": 60,
@@ -30,7 +31,7 @@ const ngxUiLoaderConfig: any = {
   "masterLoaderId": "master",
   "overlayBorderRadius": "0",
   "overlayColor": "rgba(255,255,255,0)",
-  "pbColor": "#06b6d4",
+  "pbColor": "#45648F",
   "pbDirection": "ltr",
   "pbThickness": 3,
   "hasProgressBar": true,
@@ -53,6 +54,7 @@ const ngxUiLoaderConfig: any = {
     PrimengModule,
     HttpClientModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    ToastModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
